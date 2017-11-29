@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+   <head>
+      <title>{{ title }}</title>
+   </head>
+
+   <body>
+      <h1>Hello, World!</h1>
+      <h2>The date and time on the server is: {{ time }}</h2>
+      <button type="button" onclick="toggle()">led</button>
+      <!-- <button type="button" onclick="toggle(2)">led 2</button> -->
+
+<script>
+   function on(led){
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("POST", `/on/${led}`, true);
+      xhttp.send();
+   }
+
+   function off(led){
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("POST", `/off/${led}`, true);
+      xhttp.send();
+   }
+   
+   var state={1:false, 2:false};
+   function toggle(led){
+      if (state[led] == true){
+         off(led);
+         state[led] = false;
+      } else {
+         on(led);
+         state[led] = true;
+      }
+   }   
+</script>
+
+   </body>
+</html>
